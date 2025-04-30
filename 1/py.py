@@ -37,18 +37,18 @@ class Vector:
         return norm_vector**0.5
 
 # random vectors    
-v1 = Vector([1,2,4],3)
-v2 = Vector([3,4,353],3)
-print(v1)
-print(v2) 
+# v1 = Vector([1,2,4],3)
+# v2 = Vector([3,4,353],3)
+# print(v1)
+# print(v2) 
 
-#operations
-dot_product = "the dot product of {} and{} is {}".format(v1.vector,v2.vector,v1.dot(v2))
-norm = "the norm of {} is {}".format(v1.vector,v1.magnitude())
-addition = "the sum of {} and {} is {}".format(v1.vector,v2.vector,v1.add(v2))
-scaling = "the scale of {} by 2 is {}".format(v1.vector,v1.scale(2))
+# #operations
+# dot_product = "the dot product of {} and{} is {}".format(v1.vector,v2.vector,v1.dot(v2))
+# norm = "the norm of {} is {}".format(v1.vector,v1.magnitude())
+# addition = "the sum of {} and {} is {}".format(v1.vector,v2.vector,v1.add(v2))
+# scaling = "the scale of {} by 2 is {}".format(v1.vector,v1.scale(2))
 
-print(dot_product,norm,addition,scaling,sep="\n")
+# print(dot_product,norm,addition,scaling,sep="\n")
 
 class Matrix:
     def __init__(self,matrix,dims):
@@ -62,15 +62,18 @@ class Matrix:
             for e in range(self.dims[1]):
                 val = self.matrix[i][e] + tmatrix.matrix[i][e]
                 sum_matrix[i].append(val)
-        return print (sum_matrix)
+        return sum_matrix
     
     def scalar (self,scalar):
+        scaled_matrix = []
         for a in range(self.dims[0]):
+            scaled_matrix.append([])
             for b in range(self.dims[1]):
-                self.matrix[a][b] *= scalar 
-        return print(self.matrix)
+                val = self.matrix[a][b] * scalar 
+                scaled_matrix[a].append(val)
+        return scaled_matrix
     
-    #transpose matrix
+    #to transpose tmatrix
     def transpose(self):
         trsp_matrix = []
         for w in range(self.dims[1]):
@@ -79,32 +82,28 @@ class Matrix:
                trsp_matrix[w].append(self.matrix[q][w])
         return trsp_matrix
 
-    
     def mul(self,tmatrix):
         mul_matrix = []
-        def dot_product(vector0, vector1):
-            dot_scalar = 0
-            for i in range (self.dims[0]): 
-                vector0[i] *= vector1[i]
-                dot_scalar += vector0[i]
-            return dot_scalar
-    
         for i in range(self.dims[0]):
             mul_matrix.append([])
             for e in range(tmatrix.dims[1]):
-                val = dot_product(self.matrix[i],tmatrix.transpose()[i])
+                v1 = Vector(self.matrix[i],self.dims[1])
+                v2 = Vector(tmatrix.transpose()[e],tmatrix.dims[0])
+                val = v1.dot(v2)
                 mul_matrix[i].append(val)
-        return print(mul_matrix)
+        return mul_matrix
           
-# # random matrices
-# m1 = Matrix([[1,2,5]],(1,3))
-# m2 = Matrix([[5,6],[4,4],[3,4]],(3,2))
+# random matrices
+m1 = Matrix([[1,2],[2,4],[5,6]],(3,2))
+m2 = Matrix([[5,6],[4,4],[3,4]],(3,2))
+m3 = Matrix([[4,5,6]],(1,3))
+m4 = Matrix([[0,4,32],[9,10,3],[10,1,12]],(3,3))
 
-# m1.mul(m2)
-# #matrix operations                                                      
-# m1.add(m2) 
-# m1.scalar(25)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+addition = "the sum of {} and {} is {}".format(m1.matrix,m2.matrix,m1.add(m2))
+scalar = "the scale of {} by 2 is {}".format(m1.matrix,m1.scalar(2))
+mul = "the multiplication of {} and {} is {}".format(m3.matrix,m4.matrix,m3.mul(m4))    
+
+print(addition,scalar,mul,sep="\n")
 
 
 
