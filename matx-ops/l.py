@@ -1,20 +1,10 @@
 #!/usr/bin/env python3
-class Parent:
-    def __init__(self, prop1):
-        self.prop1 = prop1
+import numpy as np
 
-    def method1(self):
-        return "Parent method1" 
+od = np.random.randint(10,31, size=5)
+twd = np.random.randint(1,34, size = (4,4))
+thd = np.random.randint(6,67,size=(2,5,6))
+print("{}".format(twd))
+# print("{}\n{}\n{}".format(od.ndim,od.shape,od.size))
 
-class Child(Parent):
-    def __init__(self,prop1,prop2):
-        super().__init__(prop1)
-        self.prop2 = prop2
-
-    def adit1(self):
-        return "Child adit1"       
-    
-dude = Child("person","alive")
-
-print(dude.method1())
-print(dude.adit1())
+print(twd[::-1,::-1])
