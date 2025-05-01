@@ -36,17 +36,6 @@ class Vector:
             norm_vector += val   
         return norm_vector**0.5
 
-# #random vectors for testing    
-v1 = Vector([1,2,4],3)
-v2 = Vector([3,4,353],3)
-
-
-# #operations
-dot_product = "the dot product of {} and{} is {}".format(v1.vector,v2.vector,v1.dot(v2))
-norm = "the norm of {} is {}".format(v1.vector,v1.magnitude())
-addition = "the sum of {} and {} is {}".format(v1.vector,v2.vector,v1.add(v2))
-scaling = "the scale of {} by 2 is {}".format(v1.vector,v1.scale(2))
-# print(dot_product,norm,addition,scaling,sep="\n")
 
 class Matrix:
     
@@ -100,22 +89,23 @@ class Matrix:
                 mul_matrix[i].append(val) #appending a result for each column of the second matrix
         return mul_matrix
 
-def fncy(matrix):
-    """Making fancy the matrix output, adding a separator"""
-    style_matrix = [str(a) for a in matrix]
-    separator = "\n"
-    style_output = separator.join(style_matrix)
-    return style_output       
+class FMatrix(Matrix):
+    """child class to make more appeling the output"""
+    def __init__(self,matrix,dims):
+        super().__init__(matrix,dims)
+    def fancy(self,target): #put separators between rows
+        style = [str(a) for a in target]
+        separator = "\n"
+        style_output = separator.join(style)
+        return style_output
+    def add(self,tmatrix):
+        add_matrix = self.fancy(super().add(tmatrix))
+        return add_matrix    
+    def mul(self,tmatrix):
+        mul_matrix = self.fancy(super().mul(tmatrix))
+        return mul_matrix
+    def scale(self,scalar):
+        scale_matrix = self.fancy(super().scale(scalar))
+        return scale_matrix
 
-# random matrices
-m1 = Matrix([[1,2],[2,4],[5,6]],(3,2))
-m2 = Matrix([[5,6],[4,4],[3,4]],(3,2))
-m3 = Matrix([[4,5,6]],(1,3))
-m4 = Matrix([[0,4,32],[9,10,3],[10,1,12]],(3,3))
-
-#operations
-addition = "the sum of {} and {} is \n{}".format(m1.matrix,m2.matrix,fncy(m1.add(m2)))
-scalar = "the scale of {} by 2 is \n{}".format(m1.matrix,fncy(m1.scale(2)))
-mul = "the multiplication of {} and {} is \n{}".format(m3.matrix,m4.matrix,fncy(m3.mul(m4)))    
-# print(addition,scalar,mul,sep="\n")
 
