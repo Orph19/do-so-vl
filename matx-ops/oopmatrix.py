@@ -1,37 +1,63 @@
 #!/usr/bin/env python3
 
 class Vector:
-    def __init__(self,vector,dimension):
+    def __init__(self,vector):
         self.vector = vector
-        self.dimension = dimension
     def __str__(self):
-        return f"Vector {self.vector} of dimension {self.dimension}"
+        return f"Vector {self.vector} of dimension {len(self.vector)}"
 
-    #n dimensional vectors operations
-    def add(self,tvector):
+#n dimensional vectors operations
+    def __add__(self,tvector):
         new_vector = []
-        for i in range (self.dimension): 
-            val = self.vector[i] + tvector.vector[i]
-            new_vector.append(val) 
-        return new_vector
+        try:
+            if len(self.vector) != len(tvector.vector):
+                raise Exception("Add:Vectors dont match dimensions")
+        except Exception as e:
+            print(e,"Try changing vectors",sep="\n")
+            return None  
+        else:
+            for i in range (len(self.vector)): 
+                val = self.vector[i] + tvector.vector[i]
+                new_vector.append(val)
+            return new_vector
+    def __sub__(self,tvector):
+        new_vector = []
+        try:
+            if len(self.vector)!=len(tvector.vector):
+                raise Exception("Sub:Vectors dont match dimensions")
+        except Exception as e:
+            print(e,"Try changing vectors",sep="\n")
+            return None
+        else:
+            for i in range (len(self.vector)):
+                val = self.vector[i] - tvector.vector[i]
+                new_vector.append(val)
+            return new_vector 
     
     def dot(self, tvector):
         dot_vector = 0
-        for i in range (self.dimension): 
-            val = self.vector[i] * tvector.vector[i]
-            dot_vector += val
-        return dot_vector
-    
+        try:
+            if len(self.vector) != len(tvector.vector):
+                raise Exception("dot:Vectors dont match dimensions")
+        except Exception as e:
+            print(e,"Try changing vectors",sep="\n")
+            return None
+        else:
+                for i in range (len(self.vector)): 
+                    val = self.vector[i] * tvector.vector[i]
+                    dot_vector += val
+                return dot_vector
+        
     def scale(self,scalar):
         scaled_vector = []
-        for i in range (self.dimension): 
+        for i in range (len(self.vector)): 
             val = self.vector[i] * scalar
             scaled_vector.append(val)
         return scaled_vector
     
     def magnitude(self):
         norm_vector = 0
-        for i in range (self.dimension):
+        for i in range (len(self.vector)):
             val = self.vector[i]** 2
             norm_vector += val   
         return norm_vector**0.5
@@ -83,8 +109,8 @@ class Matrix:
         for i in range(self.dims[0]): 
             mul_matrix.append([]) #creates the same number of rows as the first matrix
             for e in range(tmatrix.dims[1]): 
-                v1 = Vector(self.matrix[i],self.dims[1])
-                v2 = Vector(tmatrix.transpose()[e],tmatrix.dims[0])
+                v1 = Vector(self.matrix[i])
+                v2 = Vector(tmatrix.transpose()[e])
                 val = v1.dot(v2)
                 mul_matrix[i].append(val) #appending a result for each column of the second matrix
         return mul_matrix
