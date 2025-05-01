@@ -12,7 +12,6 @@ d2= Matrix(m2.tolist(), (4,3))
 result1 = m1 @ m2
 check_result1 = d1.mul(d2)
 
-print(result1,check_result1, sep="\n")  
 
 
 
