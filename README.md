@@ -1,2 +1,2 @@
-# Test 3
-Writing this using the .open()0-0
+# HI
+This is a collection of the things I learned so far
