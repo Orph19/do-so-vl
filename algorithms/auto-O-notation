@@ -1,0 +1,40 @@
+import random
+class provider:
+  def __init__(self,numbers):
+    self.number = random.choice(numbers)
+    print(f'-The provider chose secretly the number {self.number}-')
+  def provider(self,n):
+    if n > self.number:
+      print('That number is too high')
+      return 'too high'
+    elif n < self.number:
+      print("It's too low")
+      return 'too low'
+    elif n == self.number:
+      print('You are correct!')
+      return 'correct'
+
+def adivinator(f,numbers):
+  i = 1
+  while True:
+    # print(numbers)
+    n = numbers[int(len(numbers)/2)]
+    print(f'Is it {n}?')
+    hint = f(n)
+    if hint == 'too high':
+      numbers = numbers[:int(len(numbers)/2)]
+      i +=1
+    elif hint == 'too low':
+      numbers = numbers[int(len(numbers)/2)+1:]
+      i+=1
+    elif hint == 'correct':
+      print(f'It just took me {i} turns')
+      break
+
+def start():
+  numbers = [a for a in range (1,11)] #Numbers from 1 to 10
+  prov = provider(numbers)
+
+  adivinator(prov.provider,numbers)
+
+start()

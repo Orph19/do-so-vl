@@ -1,0 +1,19 @@
+# Example of O(log n)
+def adivinator():
+  numbers = list(range(1,101))
+  i = 0
+  while True:
+    # print(numbers)
+    n = numbers[int(len(numbers)/2)]
+    hint = input(f'is it {n}?')
+    if hint == 'too high':
+      numbers = numbers[:int(len(numbers)/2)]
+      i +=1
+    elif hint == 'too low':
+      numbers = numbers[int(len(numbers)/2)+1:]
+      i+=1
+    elif hint == 'correct':
+      print(f'It just took me {i} turns')
+      break
+
+adivinator()

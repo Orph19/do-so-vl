@@ -19,7 +19,6 @@ class WR:
             writer.writerows(a)
         return print('done')
     def append(self): #generate new lines of names a numbers
-        with f4.open('a') as sheet:
             del a[0]
             writer = csv.writer(sheet)
             writer.writerows(a)
